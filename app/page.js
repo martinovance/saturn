@@ -15,14 +15,14 @@ const Home = ({ products, bannerData }) => (
 
     <div className="products-container">
       {products?.map((product) => <Product key={product._id} product={product} />)}
-      {console.log(products)}
+      {/* {console.log(products)} */}
     </div>
 
     <FooterBanner footerBanner={bannerData && bannerData[0]} />
   </div>
 );
 
-export const getServerSideProps = async () => {
+export async function getServerSideProps() {
   const query = '*[_type == "product"]';
   const products = await client.fetch(query);
 
@@ -33,24 +33,5 @@ export const getServerSideProps = async () => {
     props: { products, bannerData }
   }
 }
-
-// export async function getServerSideProps() {
-//   const products = [
-//     {
-//       _createdAt: "2023-01-31T08:29:47Z",
-//       _id: "de3d15be-63eb-4f58-8d73-0bc1cad8d169",
-//       _rev: "P2uRfeHfJGlW9IJSvLdrbX",
-//       _type: "product",
-//       _updatedAt: "2023-01-31T08:29:47Z",
-//       name: "Headphones"
-//     }
-//   ];
-
-//   return {
-//     props: {
-//       products
-//     }
-//   };
-// }
 
 export default Home;
